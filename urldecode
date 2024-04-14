@@ -1,0 +1,8 @@
+#!/usr/bin/env bb
+
+(defn decode-and-print
+  [data]
+  (doseq [item data]
+    (println (java.net.URLDecoder/decode item))))
+
+(decode-and-print (if (seq *command-line-args*) *command-line-args* (line-seq (io/reader *in*))))

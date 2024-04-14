@@ -1,0 +1,13 @@
+#!/bin/bash
+
+SERVEDIR="${HOME}/public/www"
+SERVEPORT=8706
+if [[ ! -d "$SERVEDIR" ]]; then
+  echo "Dir to serve does not exist: $SERVEDIR"
+  exit 1
+elif [[ -z "$SERVEDIR" ]]; then
+  echo "SERVEDIR not set"
+  exit 1
+fi
+
+miniserve "$SERVEDIR" -p "$SERVEPORT"

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+LINE="$(gdbus call --session --dest org.gnome.Shell.Screenshot --object-path /org/gnome/Shell/Screenshot --method org.gnome.Shell.Screenshot.PickColor)"
+COLS="$(sed 's/.*<(//;s/)>.*//;s/,//g' <<< "$LINE" )"
+COLR="$(cut -d' ' -f 1 <<< "$COLS" )"
+COLG="$(cut -d' ' -f 2 <<< "$COLS" )"
+COLB="$(cut -d' ' -f 3 <<< "$COLS" )"
+
+HEXR="$(printf '%02.0x' "$(dc -e "$COLR 255 * [_1*]sad.5r0>a+0k1/ p")")"
+HEXG="$(printf '%02.0x' "$(dc -e "$COLG 255 * [_1*]sad.5r0>a+0k1/ p")")"
+HEXB="$(printf '%02.0x' "$(dc -e "$COLB 255 * [_1*]sad.5r0>a+0k1/ p")")"
+
+COL_HEX="${HEXR}${HEXG}${HEXB}"
+echo -n "$COL_HEX" | wl-copy 
+

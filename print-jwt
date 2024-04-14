@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ -n ${1+x} ]]; then
+  jwt="$1"
+elif [[ -t 1 ]]; then
+  jwt='-'
+else
+  echo "No JWT provided in STDIN or arg"
+  exit 1
+fi
+
+jwt decode -j "$jwt" | jq
